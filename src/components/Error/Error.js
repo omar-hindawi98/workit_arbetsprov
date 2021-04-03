@@ -1,5 +1,9 @@
 import './Error.scss';
 
+/**
+ * Returns a Component for Error displaying
+ * @param props, takes in prop: message
+ */
 function Error(props){
     return (
         <div>
