@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
 import {City, CityParam, CountryParam, Country, Home} from './../../routes/'
 import {Switch, Route} from 'react-router-dom';
