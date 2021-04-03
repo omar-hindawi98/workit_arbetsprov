@@ -7,7 +7,7 @@ import './Error.scss';
 function Error(props){
     return (
         <div>
-            <h2>Error</h2>
+            <h2 className="mt-4 mb-4">Error</h2>
             <div className="error_message">
                 <p>
                     {props.message}
