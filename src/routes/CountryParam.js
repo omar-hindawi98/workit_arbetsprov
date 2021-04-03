@@ -3,6 +3,8 @@ import axios from "axios";
 import apiConfig from './../config/api';
 import Error from "../components/Error/Error";
 import Spinner from "react-bootstrap/Spinner";
+import CountryResult from "../components/CountryResult/CountryResult";
+import ListGroup from "react-bootstrap/ListGroup";
 
 function CountryParam(props) {
     const [loading, setLoading] = useState(true); // Loading variable to indicate when the API is fetching data
@@ -43,7 +45,10 @@ function CountryParam(props) {
 
     let displayInfo = (result)
         ? <div>
-            res
+            <h2 className="resultTitle">{result[0].countryName}</h2>
+            <ListGroup>
+                {result.map((city) => <CountryResult name={city.name} population={city.population} key={city.geonameId} />)}
+            </ListGroup>
         </div>
         : <Error message={error} />;
 
