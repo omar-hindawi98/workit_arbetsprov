@@ -2,7 +2,6 @@ import {useEffect, useState} from 'react';
 import axios from "axios";
 import apiConfig from './../config/api';
 import Error from "../components/Error/Error";
-import CityResult from "../components/CityResult/CityResult";
 import Spinner from "react-bootstrap/Spinner";
 
 function CountryParam(props) {
@@ -28,7 +27,7 @@ function CountryParam(props) {
                 let data = res.data;
 
                 console.log(data);
-                
+
                 // No data found, display error
                 if(data.totalResultsCount === 0)
                     setError(`No data found for the given city: ${search}`);
