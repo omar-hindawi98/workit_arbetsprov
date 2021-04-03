@@ -5,7 +5,6 @@ function Country(){
     let history = useHistory();
 
     const pushToResult = (search) => {
-        console.log(search);
         history.push("/country/" + search);
     };
 
