@@ -1,21 +1,21 @@
 import './App.scss';
+import {City, CityParam, CountryParam, Country, Home} from './../../routes/'
+import {Switch, Route} from 'react-router-dom';
 
+/**
+ * Application Component is the main component that handles all routes
+ */
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>CityPop</h1>
+      <Switch>
+        <Route path="/city/:search" component={CityParam} />
+        <Route path="/city" component={City} />
+        <Route path="/country/:search" component={CountryParam} />
+        <Route path="/country" component={Country} />
+        <Route path="/Home" component={Home} />
+      </Switch>
     </div>
   );
 }
