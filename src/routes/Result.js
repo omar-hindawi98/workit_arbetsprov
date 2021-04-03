@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useEffect, useMemo, useState} from 'react';
 import axios from "axios";
 import apiConfig from './../config/api';
 import Error from "../components/Error/Error";
@@ -13,24 +13,19 @@ function CityParam(props) {
     const [result, setResult] = useState(null); // Result holder
     const [error, setError] = useState(null); // Error holder
 
-    // Check for type in search
-    const allowedTypes = ["city", "country"];
-    const type = props.match.params.type.toLowerCase();
-
-    /**
-     * Called when component mounts, tries to fetch from API
-     */
-    useEffect(() =>{
-        // Get from api
-        if(!allowedTypes.includes(allowedTypes))
-            getFromApi(props.match.params.search);
+    // Memorize array for when re-rendering
+    const allowedTypes = useMemo(() => {
+        return ["city", "country"];
     }, []);
+
+    const type = props.match.params.type.toLowerCase(); // Check for type in search
+    const search = props.match.params.search; // Search paramater
 
     /**
      * Gets data from API and sets loading to false
      * @param search parameter to query
      */
-    const getFromApi = async (search) => {
+    const getFromApi = useCallback( async (search) => {
         let query;
         if(type === "city")
             query = `${apiConfig.url}?q=${search}&orderby=relevance&featureClass=P&maxRows=1&username=${apiConfig.name}`;
@@ -39,9 +34,12 @@ function CityParam(props) {
 
         await axios.get(query)
             .then(res => {
+                console.log(res);
                 let data = res.data;
                 // No data found, display error
-                if(data.totalResultsCount === 0)
+                if(data.totalResultsCount === undefined)
+                    setError(`Error when trying to fetch data, please try again!`);
+                else if(data.totalResultsCount === 0)
                     setError(`No data found for the given ${type}: ${search}`);
                 else{
                     if(type === "city")
@@ -56,12 +54,19 @@ function CityParam(props) {
             });
 
         setLoading(false);
-    };
+    }, [type]);
+
+    /**
+     * Called when component mounts, tries to fetch from API
+     */
+    useEffect(() =>{
+        if(allowedTypes.includes(type))
+            getFromApi(search);
+    }, [search,allowedTypes,getFromApi, type]);
 
     // Display Error when invalid search type
     if(!allowedTypes.includes(type))
         return (<Error message="The page does not seem to exist" />);
-
 
     // Checks whether to display error or result
     let displayInfo = (result)
@@ -71,7 +76,9 @@ function CityParam(props) {
                 type === "city" &&
                 <div>
                     <h2 className="resultTitle">{result.toponymName}</h2>
-                    <CityResult name={result.population} />
+                    <ListGroup>
+                        <CityResult name={result.population} />
+                    </ListGroup>
                 </div>
             }
             {
