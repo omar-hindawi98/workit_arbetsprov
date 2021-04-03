@@ -15,3 +15,5 @@ Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 Builds the app for production to the `build` folder.\
 It optimizes the code for best performance in production mode.
 The build is minified and the filenames include the hashes.
+
+The builded files can then be run on a webservice for production.
