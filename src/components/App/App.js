@@ -14,7 +14,7 @@ function App() {
         <Route path="/city" component={City} />
         <Route path="/country/:search" component={CountryParam} />
         <Route path="/country" component={Country} />
-        <Route path="/Home" component={Home} />
+        <Route path="/" component={Home} />
       </Switch>
     </div>
   );
