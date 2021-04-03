@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.scss';
-import {City, CityParam, CountryParam, Country, Home} from './../../routes/'
+import {City, Country, Home, Result} from './../../routes/'
 import {Switch, Route, useLocation} from 'react-router-dom';
 import {CSSTransition, SwitchTransition} from "react-transition-group";
 
@@ -21,9 +21,8 @@ function App() {
                 classNames="fade"
             >
               <Switch location={location}>
-                <Route path="/city/:search" component={CityParam} />
+                <Route path="/:type/:search" component={Result} />
                 <Route path="/city" component={City} />
-                <Route path="/country/:search" component={CountryParam} />
                 <Route path="/country" component={Country} />
                 <Route path="/" component={Home} />
               </Switch>
