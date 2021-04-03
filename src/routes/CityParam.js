@@ -1,6 +1,9 @@
 import {useEffect, useState} from 'react';
 import axios from "axios";
 import apiConfig from './../config/api';
+import Error from "../components/Error/Error";
+import CityResult from "../components/CityResult/CityResult";
+import Spinner from "react-bootstrap/Spinner";
 
 function CityParam(props) {
     const [loading, setLoading] = useState(true); // Loading variable to indicate when the API is fetching data
@@ -36,8 +39,21 @@ function CityParam(props) {
         setLoading(false);
     };
 
+    let displayInfo = (result)
+        ? <div>
+            <h2 className="resultTitle">{result.toponymName}</h2>
+            <CityResult name={result.population} />
+        </div>
+        : <Error message={error} />;
+
     return (
-        <div></div>
+        <div>
+        {
+            (loading)
+            ? <Spinner animation="border" variant="light" />
+            :  displayInfo
+        }
+        </div>
     );
 }
 
