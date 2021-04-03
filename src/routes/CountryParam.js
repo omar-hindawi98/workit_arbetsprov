@@ -5,6 +5,7 @@ import Error from "../components/Error/Error";
 import Spinner from "react-bootstrap/Spinner";
 import CountryResult from "../components/CountryResult/CountryResult";
 import ListGroup from "react-bootstrap/ListGroup";
+import {CSSTransition, SwitchTransition} from "react-transition-group";
 
 function CountryParam(props) {
     const [loading, setLoading] = useState(true); // Loading variable to indicate when the API is fetching data
@@ -54,11 +55,19 @@ function CountryParam(props) {
 
     return (
         <div>
-            {
-                (loading)
-                    ? <Spinner animation="border" variant="light" />
-                    :  displayInfo
-            }
+            <SwitchTransition mode="out-in">
+                <CSSTransition
+                    timeout={300}
+                    key={loading}
+                    classNames="fade"
+                >
+                {
+                    (loading)
+                        ? <Spinner animation="border" variant="light" />
+                        :  displayInfo
+                }
+                </CSSTransition>
+            </SwitchTransition>
         </div>
     );
 }

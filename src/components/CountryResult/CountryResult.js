@@ -1,6 +1,7 @@
 import './CountryResult.scss';
 import ListGroupItem from "react-bootstrap/ListGroupItem";
 import {useState} from "react";
+import {CSSTransition, SwitchTransition} from "react-transition-group";
 
 /**
  * Returns a Component for Country Result displaying
@@ -18,16 +19,26 @@ function CityResult(props){
 
     return (
         <ListGroupItem className="countryResult" onClick={toggleInfo}>
-            {
-                toggle
-                ? <div className="resultItem">
-                    <b>Population</b>
-                    <h3>{props.population.toLocaleString()}</h3>
-                </div>
-                : <div className="resultItem">
-                    <h3>{props.name}</h3>
-                </div>
-            }
+            <SwitchTransition mode="out-in">
+                <CSSTransition
+                    timeout={300}
+                    classNames="fade"
+                    key={toggle}
+                >
+                    <div>
+                    {
+                        toggle
+                        ? <div className="resultItem">
+                            <b>Population</b>
+                            <h3>{props.population.toLocaleString()}</h3>
+                        </div>
+                        : <div className="resultItem">
+                            <h3>{props.name}</h3>
+                        </div>
+                    }
+                    </div>
+                </CSSTransition>
+            </SwitchTransition>
         </ListGroupItem>
     );
 }

@@ -4,6 +4,7 @@ import apiConfig from './../config/api';
 import Error from "../components/Error/Error";
 import CityResult from "../components/CityResult/CityResult";
 import Spinner from "react-bootstrap/Spinner";
+import {CSSTransition, SwitchTransition} from "react-transition-group";
 
 function CityParam(props) {
     const [loading, setLoading] = useState(true); // Loading variable to indicate when the API is fetching data
@@ -48,11 +49,19 @@ function CityParam(props) {
 
     return (
         <div>
-        {
-            (loading)
-            ? <Spinner animation="border" variant="light" />
-            :  displayInfo
-        }
+            <SwitchTransition mode="out-in">
+                <CSSTransition
+                    timeout={300}
+                    key={loading}
+                    classNames="fade"
+                >
+                {
+                    (loading)
+                    ? <Spinner animation="border" variant="light" />
+                    :  displayInfo
+                }
+                </CSSTransition>
+            </SwitchTransition>
         </div>
     );
 }
