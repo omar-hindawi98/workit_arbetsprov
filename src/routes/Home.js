@@ -8,13 +8,13 @@ function Home() {
     return (
         <div className="Home">
             <Link to="/city">
-                <Button variant="primary" size="lg" className="mr-3">
-                    City
+                <Button variant="primary" size="lg" className="mr-3 homeBtn">
+                    Search by City
                 </Button>
             </Link>
             <Link to="/country">
-                <Button variant="primary" size="lg">
-                    Country
+                <Button variant="primary" size="lg homeBtn">
+                    Search by Country
                 </Button>
             </Link>
         </div>

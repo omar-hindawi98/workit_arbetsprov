@@ -34,7 +34,6 @@ function CityParam(props) {
 
         await axios.get(query)
             .then(res => {
-                console.log(res);
                 let data = res.data;
                 // No data found, display error
                 if(data.totalResultsCount === undefined)
@@ -75,7 +74,7 @@ function CityParam(props) {
                 // Display for city
                 type === "city" &&
                 <div>
-                    <h2 className="resultTitle">{result.toponymName}</h2>
+                    <h2 className="resultTitle mt-4 mb-4">{result.toponymName}</h2>
                     <ListGroup>
                         <CityResult name={result.population} />
                     </ListGroup>
@@ -85,7 +84,7 @@ function CityParam(props) {
                 // Display for country
                 type === "country" &&
                 <div>
-                    <h2 className="resultTitle">{result[0].countryName}</h2>
+                    <h2 className="resultTitle mt-4 mb-4">{result[0].countryName}</h2>
                     <ListGroup>
                         {result.map((city) => <CountryResult name={city.name} population={city.population} key={city.geonameId} />)}
                     </ListGroup>
@@ -104,7 +103,7 @@ function CityParam(props) {
                 >
                     {
                         (loading)
-                            ? <Spinner animation="border" variant="light" />
+                            ? <Spinner animation="border" variant="light" className="mt-4" />
                             :  displayInfo
                     }
                 </CSSTransition>

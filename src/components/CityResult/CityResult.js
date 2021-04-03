@@ -8,8 +8,8 @@ import ListGroupItem from "react-bootstrap/ListGroupItem";
 function CityResult(props){
     return (
         <ListGroupItem className="cityResult">
-            <b>Population</b>
-            <h3>{props.name.toLocaleString()}</h3>
+            <b className="population">Population</b>
+            <h3 className="population_digit">{props.name.toLocaleString()}</h3>
         </ListGroupItem>
     );
 }

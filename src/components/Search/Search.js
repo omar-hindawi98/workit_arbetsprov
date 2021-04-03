@@ -37,9 +37,9 @@ function Search(props){
 
     return(
         <div>
-            <h3>Search by {props.title}</h3>
+            <h2 className="mt-4 mb-4">Search by {props.title}</h2>
             <Form onSubmit={performSearch}>
-                <Form.Control type="text" placeholder={props.placeholder} onChange={handleSearchText}/>
+                <Form.Control type="text" placeholder={props.placeholder} onChange={handleSearchText} className="search_field"/>
 
                 <Button variant="primary" type="submit" className="search_button">
                     <SearchIcon/>

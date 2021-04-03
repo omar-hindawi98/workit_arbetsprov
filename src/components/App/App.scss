@@ -4,3 +4,34 @@
   margin: 5em auto;
   color: white;
 }
+
+.population{
+  text-transform: uppercase;
+}
+
+.population_digit{
+  font-size: 2em;
+}
+
+h2,h3{
+  font-weight: 300;
+}
+
+h2{
+  text-transform: uppercase;
+  font-size: 1.5em;
+}
+
+h3{
+  font-size: 1.4em;
+}
+
+.Home{
+
+  margin-top: 50px;
+
+  & .homeBtn{
+    padding: 25px;
+    text-transform: uppercase;
+  }
+}

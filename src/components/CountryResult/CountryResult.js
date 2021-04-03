@@ -29,8 +29,8 @@ function CityResult(props){
                     {
                         toggle
                         ? <div className="resultItem">
-                            <b>Population</b>
-                            <h3>{props.population.toLocaleString()}</h3>
+                            <b className="population">Population</b>
+                            <h3 className="population_digit">{props.population.toLocaleString()}</h3>
                         </div>
                         : <div className="resultItem">
                             <h3>{props.name}</h3>

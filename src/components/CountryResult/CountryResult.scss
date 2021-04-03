@@ -1,3 +1,15 @@
 .countryResult{
   color: #282c34;
+  cursor: pointer;
+
+  transition: background-color 0.1s linear 0s;
+
+  &:hover{
+    background-color: #d8d8d8;
+  }
+
+  &:active,
+  &:focus{
+    background-color: #cecece;
+  }
 }
