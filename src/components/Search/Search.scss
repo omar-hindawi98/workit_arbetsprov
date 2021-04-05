@@ -9,4 +9,15 @@
 
 .search_field{
   text-align: center;
+  transition: padding 0.25s ease-in 0s;
+  padding-left: calc(1.5em + .75rem);
+  padding-right: calc(1.5em + .75rem);
+}
+
+.form-group{
+  position: relative;
+}
+
+.feedback {
+  position: absolute;
 }

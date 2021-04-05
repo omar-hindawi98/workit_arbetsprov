@@ -2,6 +2,7 @@ import './Search.scss';
 import {useState} from "react";
 import { Search as SearchIcon} from 'react-bootstrap-icons';
 import {Form, Button} from 'react-bootstrap';
+import invalid_chars from './../../modules/invalid_char';
 
 /**
  * A search box component that will be used for parsing the search paramaters
@@ -9,7 +10,8 @@ import {Form, Button} from 'react-bootstrap';
  * One return prop: onSearch
  */
 function Search(props){
-    const [search, setSearch] = useState(null);
+    const [search, setSearch] = useState("");
+    const [invalid, setInvalid] = useState(false);
 
     /**
      * Returns the search value to onSearch prop
@@ -19,8 +21,8 @@ function Search(props){
         // Disable HTML Form functions
         e.preventDefault();
 
-        // Prevent empty searches
-        if(!search || !search.trim())
+        // Prevent empty searches && invalid chars
+        if(!invalid_chars.test(search) || !search.trim())
             return;
 
         // Return search string to onSearch prop
@@ -32,14 +34,29 @@ function Search(props){
      * @param e, Event value
      */
     let handleSearchText = (e) => {
-        setSearch(e.target.value);
+        let search_value = e.target.value;
+        setSearch(search_value);
+
+        // Prevent invalid characters
+        if(!invalid_chars.test(search_value) && search_value.trim()){
+            setInvalid(true);
+            return;
+        }
+
+        // Reset invalid
+        setInvalid(false);
     };
 
     return(
         <div>
             <h2 className="mt-4 mb-4">Search by {props.title}</h2>
             <Form onSubmit={performSearch}>
-                <Form.Control type="text" placeholder={props.placeholder} onChange={handleSearchText} className="search_field"/>
+                <Form.Group>
+                    <Form.Control type="text" placeholder={props.placeholder} onChange={handleSearchText} className="search_field" isInvalid={invalid} required/>
+                    <Form.Control.Feedback type="invalid" className="feedback">
+                        The search may only contain alphabetical characters.
+                    </Form.Control.Feedback>
+                </Form.Group>
 
                 <Button variant="primary" type="submit" className="search_button">
                     <SearchIcon/>

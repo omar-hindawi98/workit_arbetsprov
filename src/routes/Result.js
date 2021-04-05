@@ -7,6 +7,7 @@ import Spinner from "react-bootstrap/Spinner";
 import {CSSTransition, SwitchTransition} from "react-transition-group";
 import ListGroup from "react-bootstrap/ListGroup";
 import CountryResult from "../components/CountryResult/CountryResult";
+import invalid_chars from './../modules/invalid_char';
 
 function CityParam(props) {
     const [loading, setLoading] = useState(true); // Loading variable to indicate when the API is fetching data
@@ -27,6 +28,15 @@ function CityParam(props) {
      */
     const getFromApi = useCallback( async (search) => {
         let query;
+
+        // Check for invalid characters
+        if(!invalid_chars.test(search) || !search.trim()){
+            setError("The search may only contain alphabetical characters.");
+            setLoading(false);
+            return;
+        }
+
+        // Perform Query
         if(type === "city")
             query = `${apiConfig.url}?q=${search}&orderby=relevance&featureClass=P&maxRows=1&username=${apiConfig.name}`;
         else if(type === "country")
