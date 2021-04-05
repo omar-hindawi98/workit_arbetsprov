@@ -3,6 +3,10 @@ This project was created to serve as an example of how to solve the assignment g
 The project runs on React.js and is tasked to use geonames API for fetching information about countries and cities.
 In specific, it queries top 5 most populated cities of a country, whilst also displaying the population for the given city.
 
+## Installing dependencies
+### `yarn install`
+To install the dependencies for the project. Must be done before running.
+
 ## Running the project
 In the project directory, you can run:
 
